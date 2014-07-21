@@ -1,0 +1,12 @@
+{
+
+    "name": "itforms",
+    "dependencies": {
+        "jquery": null,
+        "underscore": null,
+        "angular": "1.2.0-rc.2",
+	"json3": null
+
+
+    }
+}

@@ -1,0 +1,28 @@
+<div class="itforms-control" style="float:right;min-width: 300px;margin-right:10px;"  >
+    <h3>Internals</h3>
+    <button class="btn btn-info btn-mini" ng-click="Clear()">Clear</button>
+
+    <div class="row">
+        <div class="span4">
+            <h4>Property Changes - {{Watcher.changes.length}}</h4>
+            <ul class="watcher">
+                <li ng-repeat="value in Values track by $id($index)">{{value}}</li>
+            </ul>
+        </div>
+        <div class="span4">
+            <h4>CSBs - {{CSB.conditionsevaluated}}</h4>
+
+            <button class="btn btn-mini btn-info" ng-click="ToggleCSBData()">Show CSBs</button>
+
+            <ol ng-show="ShowCSBData" class="watcher">
+                <li ng-repeat="csb in CSB.csbs" ng-mouseenter="HighlightControls(csb)" ng-mouseleave="UnHighlightControls()" >{{csb}}</li>
+            </ol>
+
+            <pre ng-show="ShowCSBData" class="watcher" ng-bind="CSB.csbs | clean"></pre>
+
+            <ul class="watcher">
+                <li ng-repeat="value in CSBValues track by $id($index)">{{value | csbformat }}</li>
+            </ul>
+        </div>
+    </div>
+</div>

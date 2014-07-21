@@ -1,0 +1,12 @@
+<div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
+
+    <h3>{{control.name}} <span class="required" ng-show="control.required">*</span></h3>
+    <button class="btn btn-danger" ng-bind="control.message" ng-show="control.message"></button><br>
+    <div class="input-append">
+        <input type="text" ng-model="newvalue" ng-disabled="!control.enabled" ng-blur="HandleBlur()"  />
+        <button ng-click="Add(newvalue)" ng-disabled="!newvalue" ng-show="control.enabled" class="btn btn-info">Add</button>
+    </div>
+    <ul>
+        <li ng-repeat="item in control.values">{{item}} <button class="btn btn-mini" ng-show="control.enabled" ng-click="control.remove(item)">X</button></li>
+    </ul>
+</div>

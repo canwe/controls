@@ -1,0 +1,22 @@
+<div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
+    <h3>{{control.label}} <span class="required" ng-show="control.required">*</span></h3>
+    <fieldset>
+        <div  ng-if="control.style === 'compact'">
+            <span ng-repeat="value in control.values"><input type="checkbox" ng-model="value.checked">{{value.value}}</span>
+        </div>
+        <ul ng-if="control.style === 'oneperline'">
+            <li ng-repeat="value in control.values">
+                <input type="checkbox" ng-model="value.checked">{{value.value}}
+            </li>
+        </ul>
+
+        <div ng-if="control.style === 'columns'" ng-class="{column1:control.columncount === 1, column2:control.columncount === 2, column3:control.columncount === 3, column4:control.columncount === 4, column5:control.columncount === 5,column6:control.columncount === 6 ,column7:control.columncount === 7,column8:control.columncount === 8,column9:control.columncount === 9,column10:control.columncount === 10 }">
+                <div ng-repeat="value in control.values">
+                    <input type="checkbox" ng-model="value.checked">{{value.value}}
+                </div>
+        </div>
+
+        <!--<pre>{{control.Value() | json}}</pre>-->
+
+    </fieldset>
+</div>

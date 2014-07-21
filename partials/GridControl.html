@@ -1,0 +1,25 @@
+<div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
+    <h3>{{control.label}} <span class="required" ng-show="control.required">*</span></h3>
+    <fieldset>
+        <button ng-if="control.showaddbutton" ng-click="control.add()">Add</button>
+        <table class="gridcontrol">
+        <tr>
+            <td ng-repeat="column in control.template">{{column.title}} <span class="required" ng-show="column.required">*</span></td>
+        </tr>
+
+        <tr ng-repeat="row in control.values">
+            <td ng-repeat="cell in row" ng-class="{ bottomborder: control.showgridlineshorizontal }">
+                <input ng-if="cell.type === 'textbox'" type="text" ng-model="cell.value" ng-disabled="!cell.enabled" placeholder="{{cell.placeholder}}">
+                <textarea ng-if="cell.type === 'textarea'" ng-model="cell.value" ng-disabled="!cell.enabled" placeholder="{{cell.placeholder}}"></textarea>
+                <select ng-if="cell.type==='dropdownlist'" ng-model="cell.value" ng-options="c for c in cell.values" ng-disabled="!cell.enabled" placeholder="{{cell.placeholder}}"></select>
+                <input type="datetime" datetimepicker="" ng-if="cell.type === 'date'" ng-model="cell.value" ng-disabled="!cell.enabled" placeholder="{{cell.placeholder}}" />
+                <input type="checkbox" ng-if="cell.type === 'checkbox'" ng-model="cell.value" ng-disabled="!cell.enabled" /><label ng-if="cell.type === 'checkbox'">{{cell.value}}</label>
+                <p ng-if="cell.type === 'paragraph'" ng-bind-html="cell.value"></p>
+            </td>
+            <td><button ng-if="showRemoveButtons()" class="btn btn-danger" ng-click="control.remove(row)" ng-show="control.enabled && !control.readonly" ng-disabled="!control.enabled">X</button></td>
+
+        </tr>
+        </table>
+
+    </fieldset>
+</div>

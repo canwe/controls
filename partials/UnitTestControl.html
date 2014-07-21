@@ -1,0 +1,6 @@
+<div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
+
+    <h3>{{control.label}} <span class="required" ng-show="control.required">*</span></h3>
+    <div style="width:20px;margin-left:20px;" ng-class="{ unittestpass:control._pass, unittestfail:!control._pass }">*</div>
+
+</div>
