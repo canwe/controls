@@ -4,10 +4,9 @@
     ITForms.Angular = angular.module("itforms", [ 'ngSanitize']);
 
     // Encapsulates the call to the static data method
-    ITForms.Angular.factory('FormData', function ($http) {
+    ITForms.Angular.factory('FormData', function () {
 
        return ITForms.FormData || {};
-
 
     });
 
