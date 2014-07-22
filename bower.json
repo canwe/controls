@@ -1,0 +1,26 @@
+{
+  "name": "controls",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jeremyshantz/controls",
+  "authors": [
+    "Jeremy Shantz <jeremy@shantz.io>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.20",
+    "underscore": "~1.6.0",
+    "moment": "~2.7.0",
+    "bootstrap": "~3.2.0",
+    "angular-resource": "~1.2.20",
+    "angular-sanitize": "~1.2.20",
+    "json3": "~3.3.2"
+  }
+}
