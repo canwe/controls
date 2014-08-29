@@ -6,8 +6,7 @@
     // Encapsulates the call to the static data method
     ITForms.Angular.factory('FormData', function () {
 
-       return ITForms.FormData || {};
-
+        return ITForms.FormData || {};
     });
 
     ITForms.Angular.factory('CSB', function (FormData, Form, Watcher) {
@@ -38,7 +37,6 @@
 
             // Event to allow subscribers to register for change notifications
             this.OnChange = new ITForms.Events.Event();
-            var self = this;
 
             // Add the value change to the collection and notify subscribers
             this.add = function (object, member, value) {

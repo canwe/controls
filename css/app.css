@@ -16,8 +16,9 @@
     outline: 0 none;
 }
 
-.itforms-control {
+.xcontrol {
     width:50%;
+    border: 1px solid black;
 }
 
 .unittestpass {

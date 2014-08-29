@@ -17,7 +17,7 @@ module.exports = function(config) {
      '../js/vendor/*.js',
      '../js/model/Controls.js', // must be first model file to load
      '../js/model/*.js',
-        '../js/app.js',
+        '../js/angular_app/app.js',
         '../js/*.js',
       'spec/*.js'
     ],
