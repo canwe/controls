@@ -1,4 +1,8 @@
-﻿
+﻿var expect = require('expect.js');
+
+var angular = require('../js//vendors/angular/angular.js');
+var angular = require('../js//vendors/angular/angular.js');     
+
 describe('CSB', function () {
 
     var getCSB = function () {
@@ -10,7 +14,7 @@ describe('CSB', function () {
 
         var csb = getCSB();
 
-        expect(csb instanceof ITForms.CSB2).toBe(true);
+        expect(csb instanceof ITForms.CSB2).to.be(true);
 
     });
 
@@ -24,7 +28,7 @@ describe('CSB', function () {
 
                 var csb = getCSB();
 
-                expect(csb.CreateFormatIfNecessary(format)).toBe('test');
+                expect(csb.CreateFormatIfNecessary(format)).to.be('test');
             });
 
             it('CreateFormatIfNecessary - empty string returns false', function () {
@@ -33,7 +37,7 @@ describe('CSB', function () {
 
                 var csb = getCSB();
 
-                expect(csb.CreateFormatIfNecessary(format, 1)).toBe('{0}');
+                expect(csb.CreateFormatIfNecessary(format, 1)).to.be('{0}');
             });
 
             it('CreateFormatIfNecessary - bool returns false', function () {
@@ -42,7 +46,7 @@ describe('CSB', function () {
 
                 var csb = getCSB();
 
-                expect(csb.CreateFormatIfNecessary(format, 1)).toBe('{0}');
+                expect(csb.CreateFormatIfNecessary(format, 1)).to.be('{0}');
             });
 
             it('CreateFormatIfNecessary - object returns false', function () {
@@ -51,7 +55,7 @@ describe('CSB', function () {
 
                 var csb = getCSB();
 
-                expect(csb.CreateFormatIfNecessary(format, 1)).toBe('{0}');
+                expect(csb.CreateFormatIfNecessary(format, 1)).to.be('{0}');
             });
 
         });
@@ -59,15 +63,15 @@ describe('CSB', function () {
         describe('CreateFormat', function () {
 
             it('CreateFormat - 1', function () {
-                expect(getCSB().CreateFormat(1)).toBe('{0}');
+                expect(getCSB().CreateFormat(1)).to.be('{0}');
             });
 
             it('CreateFormat - 2', function () {
-                expect(getCSB().CreateFormat(2)).toBe('{0} && {1}');
+                expect(getCSB().CreateFormat(2)).to.be('{0} && {1}');
             });
 
             it('CreateFormat - 3', function () {
-                expect(getCSB().CreateFormat(3)).toBe('{0} && {1} && {2}');
+                expect(getCSB().CreateFormat(3)).to.be('{0} && {1} && {2}');
             });
 
         });
@@ -77,7 +81,7 @@ describe('CSB', function () {
 
 
         it('should work', function () {
-           // expect(result).toBe(true);
+           // expect(result).to.be(true);
         });
 
         it('StringFormat', function () {
@@ -87,27 +91,27 @@ describe('CSB', function () {
 
             var format = '{0} && ( {1} || {2} )';
             var expected = true;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
             format = '{0} && {1}';
             expected = false;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
             format = '{0} || {1}';
             expected = true;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
             format = '{0} && !{1}';
             expected = true;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
             format = '{0} && (!{1} && {2})';
             expected = true;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
             format = '{0} && (!{1} && {2})';
             expected = true;
-            expect(eval(csb.StringFormat(format, truths))).toBe(expected);
+            expect(eval(csb.StringFormat(format, truths))).to.be(expected);
 
         });
     });
@@ -118,7 +122,7 @@ describe('CSB', function () {
 
             var csb = getCSB();
             var result = csb.ConditionsMatch('', []);
-            expect(result).toBe(true);
+            expect(result).to.be(true);
         });
 
         it('empty format ands together the conditions', function () {
@@ -129,13 +133,13 @@ describe('CSB', function () {
         it('empty condition is match', function () {
             var csb = getCSB();
             var result = csb.ConditionIsMatch();
-            expect(result).toBe(true);
+            expect(result).to.be(true);
         });
 
         it('undefined is match', function () {
             var csb = getCSB();
             var result = csb.ConditionIsMatch('');
-            expect(result).toBe(true);
+            expect(result).to.be(true);
         });
 
 
@@ -143,35 +147,35 @@ describe('CSB', function () {
 
             var csb = getCSB();
             var result = csb.ConditionIsMatch({ condition: '1===1' });
-            expect(result).toBe(true);
+            expect(result).to.be(true);
         });
 
 
         it('serializing data types', function () {
 
             var value = true;
-            expect(angular.toJson(value, true)).toBe('true');
+            expect(angular.toJson(value, true)).to.be('true');
 
             value = undefined;
-            expect(angular.toJson(value, true)).toBe(undefined);
+            expect(angular.toJson(value, true)).to.be(undefined);
 
             value = 'test';
-            expect(angular.toJson(value, true)).toBe('"test"');
+            expect(angular.toJson(value, true)).to.be('"test"');
 
             value = null;
-            expect(angular.toJson(value, true)).toBe('null');
+            expect(angular.toJson(value, true)).to.be('null');
 
             value = [ true ];
-            expect(angular.toJson(value, false)).toBe('[true]');
+            expect(angular.toJson(value, false)).to.be('[true]');
 
             value = [ 'test' ];
-            expect(angular.toJson(value, false)).toBe('["test"]');
+            expect(angular.toJson(value, false)).to.be('["test"]');
 
             value = [ 1, 2 ];
-            expect(angular.toJson(value, false)).toBe('[1,2]');
+            expect(angular.toJson(value, false)).to.be('[1,2]');
 
             value = [ new Date(2013, 0, 1) ];
-            expect(angular.toJson(value, false)).toBe('["2013-01-01T05:00:00.000Z"]');
+            expect(angular.toJson(value, false)).to.be('["2013-01-01T05:00:00.000Z"]');
 
         });
 
@@ -186,47 +190,47 @@ describe('CSB', function () {
 
             value = '';
             valuetype = typeof value;
-            expect(valuetype).toBe('string');
+            expect(valuetype).to.be('string');
 
             value = 1;
             valuetype = typeof value;
-            expect(valuetype).toBe('number');
+            expect(valuetype).to.be('number');
 
             value = NaN;
             valuetype = typeof value;
-            expect(valuetype).toBe('number');
+            expect(valuetype).to.be('number');
 
             value = true;
             valuetype = typeof value;
-            expect(valuetype).toBe('boolean');
+            expect(valuetype).to.be('boolean');
 
             value = function x() {};
             valuetype = typeof value;
-            expect(valuetype).toBe('function');
+            expect(valuetype).to.be('function');
 
             value = [];
             valuetype = typeof value;
-            expect(valuetype).toBe('object');
+            expect(valuetype).to.be('object');
 
             value = {};
             valuetype = typeof value;
-            expect(valuetype).toBe('object');
+            expect(valuetype).to.be('object');
 
             value = arguments;
             valuetype = typeof value;
-            expect(valuetype).toBe('object');
+            expect(valuetype).to.be('object');
 
             value = null;
             valuetype = typeof value;
-            expect(valuetype).toBe('object');
+            expect(valuetype).to.be('object');
 
             value = new Date();
             valuetype = typeof value;
-            expect(valuetype).toBe('object');
+            expect(valuetype).to.be('object');
 
             value = undefined;
             valuetype = typeof value;
-            expect(valuetype).toBe('undefined');
+            expect(valuetype).to.be('undefined');
 
         });
 
@@ -247,54 +251,54 @@ describe('CSB', function () {
 
             value = '';
             stringvalue = String(value);
-            expect(stringvalue).toBe('');
+            expect(stringvalue).to.be('');
 
             value = 'test';
             stringvalue = String(value);
-            expect(stringvalue).toBe('test');
+            expect(stringvalue).to.be('test');
 
             value = 1;
             stringvalue = String(value);
-            expect(stringvalue).toBe('1');
+            expect(stringvalue).to.be('1');
 
             value = NaN;
             stringvalue = String(value);
-            expect(stringvalue).toBe('NaN');
+            expect(stringvalue).to.be('NaN');
 
             value = true;
             stringvalue = String(value);
-            expect(stringvalue).toBe('true');
+            expect(stringvalue).to.be('true');
 
             value = function x() {};
             stringvalue = String(value);
-            expect(stringvalue).toBe('function x() {}');
+            expect(stringvalue).to.be('function x() {}');
 
             value = ['a', 'b'];
             stringvalue = String(value);
-            expect(stringvalue).toBe('a,b');
+            expect(stringvalue).to.be('a,b');
 
             value = { name: 'a', value: 'b'};
             stringvalue = String(value);
-            expect(stringvalue).toBe('[object Object]');
+            expect(stringvalue).to.be('[object Object]');
             stringvalue = angular.toJson(value);
-            expect(stringvalue).toBe('{"name":"a","value":"b"}');
+            expect(stringvalue).to.be('{"name":"a","value":"b"}');
 
             value = arguments;
             stringvalue = String(value);
-            expect(stringvalue).toBe('[object Arguments]');
+            expect(stringvalue).to.be('[object Arguments]');
 
             value = null;
             stringvalue = String(value);
-            expect(stringvalue).toBe('null');
+            expect(stringvalue).to.be('null');
 
             value = new Date(2013, 1, 1);
             stringvalue = String(value);
-            expect(stringvalue).toBe('Fri Feb 01 2013 00:00:00 GMT-0500 (Eastern Daylight Time)');
-            expect(isoDateString(value)).toBe('2013-02-01T05:00:00Z');
+            expect(stringvalue).to.be('Fri Feb 01 2013 00:00:00 GMT-0500 (Eastern Daylight Time)');
+            expect(isoDateString(value)).to.be('2013-02-01T05:00:00Z');
 
             value = undefined;
             stringvalue = String(value);
-            expect(stringvalue).toBe('undefined');
+            expect(stringvalue).to.be('undefined');
 
         });
     });

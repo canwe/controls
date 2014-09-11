@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4" />
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$" libraries="{controls node_modules}" />
+    <file url="file://$PROJECT_DIR$/test/tests.spec.js" libraries="{mocha-DefinitelyTyped, should-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{expect.js-DefinitelyTyped}" />
+  </component>
+</project>
 
