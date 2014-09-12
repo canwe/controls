@@ -30,8 +30,6 @@
 
     var csb2 = function (csbdata, form) {
 
-        this.triggercount = 0;
-        this.conditionsevaluated = 0;
         this.debuglog = [];
 
         /* Validates that csb config data each have the right members */

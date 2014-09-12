@@ -11,26 +11,22 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
+<div>
 
-<script>
-    window.FormData = [
-        { name: 'control1', visible: true, message:'One' },
-        { name: 'control2', visible: true, message:'Two' },
-        { name: 'control3', visible: true, message:'Three' }
-    ];
+    <div ng-app="form" id="ng-app" id="angular" >
+<!-- directive:DebugControl -->
+        <!-- directive: CheckboxControl isrequired -->
+        <!-- directive: CheckboxControl isrequired2 -->
 
-</script>
-<div style="display:flex">
+        <!-- directive: ListControl girls -->
+        <!-- directive: ListControl boys -->
 
-    <div ng-app="demo" id="ng-app" id="angular" style="flex:flex-grow; flex-basis: 50%;" >
 
-        <outer><inner name="control1" /></outer>
-        <outer><inner name="control2" /></outer>
-        <outer><inner name="control3" /></outer>
+        <!-- directive GridControl grid -->
+        <!-- directive: MultiSelectControl selecta -->
+        <!-- directive: MultiSelectControl selectb -->
+        <!-- directive: MultiSelectControl selectc -->
 
-    </div>
-
-    <div id="react"  style="flex:flex-grow;">
 
     </div>
 
@@ -38,14 +34,12 @@
 
 <script src="js/vendors/jquery/dist/jquery.min.js"></script>
 <script src="js/vendors/underscore/underscore.js"></script>
-<script src="js/vendors/angular/angular.min.js"></script>
-<script src="http://fb.me/react-0.11.1.js"></script>
-<script src="js/JSXTransformer.js"></script>
+<script src="js/vendors/angular/angular.js"></script>
+<script src="js/vendors/angular-resource/angular-resource.min.js"></script>
+<script src="js/vendors/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="js/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="js/plugins.js"></script>
 
-<script type="text/jsx" src="js/reactApp.js"/></script>
-<script src="js/angularApp.js"></script>
-
-<!--
 <script src="js/app.js"></script>
 <script src="js/model/Controls.js"></script>
 <script src="http://localhost:3000/form/teamslug/formslug/"></script>
@@ -56,14 +50,7 @@
 <script src="js/model/MultiSelectControl.js"></script>
 <script src="js/model/Events.js"></script>
 <script src="js/model/Form.js"></script>
-
 <script src="js/CSB2.js"></script>
-
-<script src="js/vendors/angular-resource/angular-resource.min.js"></script>
-<script src="js/vendors/angular-sanitize/angular-sanitize.min.js"></script>
-
-<script src="js/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="js/plugins.js"></script>
 
 <script src="js/DebugControlDirective.js"></script>
 <script src="js/ListControlDirective.js"></script>
@@ -72,7 +59,6 @@
 <script src="js/UnitTestControlDirective.js"></script>
 <script src="js/MultiSelectDirective.js"></script>
 <script src="js/DateTimePickerDirective.js"></script>
--->
 
 </body>
 </html>

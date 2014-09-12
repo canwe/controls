@@ -100,7 +100,7 @@ var controldata = [
     {
         name: 'boys',
         values: ['Jacob', 'Alex', 'Henry'],
-        type: 'ListControl',
+            type: 'ListControl',
         display: true,
         enabled: true
     },

@@ -1,7 +1,9 @@
-﻿(function (ITForms) {
+﻿window.ITForms = {};
+
+(function (ITForms) {
     'use strict';
 
-    ITForms.Angular = angular.module("itforms", [ 'ngSanitize']);
+    ITForms.Angular = angular.module("form", [ 'ngSanitize']);
 
     // Encapsulates the call to the static data method
     ITForms.Angular.factory('FormData', function () {
@@ -83,7 +85,7 @@
         };
 
     }]);
-}(ITForms || {}));
+}(window.ITForms));
 
 
 ITForms.Diff = function (newobject, oldobject, keys) {
