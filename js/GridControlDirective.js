@@ -1,13 +1,13 @@
 (function (app) {
     'use strict';
 
-    app.directive('GridControl', function (Form, $sce) {
+    app.directive('gridControl', function (Form, $sce) {
 
         return {
+            templateUrl: "partials/GridControl.html",
             restrict: 'M',
             replace: true,
-            scope: {},
-            templateUrl: "partials/GridControl.html",
+            scope: { control: '='},
             controller: function ($scope) {
 
                 $scope.trust = function (txt) {
@@ -25,9 +25,6 @@
                     // if the control is required, don't show the remove button if there's only one row
                     return !control.required || (control.required && control.values.length > 1);
                 };
-            },
-            link: function (scope, element, attr) {
-                scope.control = Form.controls.get(attr.GridControl);
             }
         };
     });

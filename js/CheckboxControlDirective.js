@@ -1,22 +1,28 @@
 (function (app) {
     'use strict';
 
-    app.directive("CheckboxControl", function (Form) {
+    app.directive("checkboxControl", function (Form, $compile) {
 
         return {
-            restrict: "M",
+            templateUrl: "partials/CheckboxControl.html",
+            restrict: "E",
             replace: true,
+            terminal: true,
+            priority: 1000,
             scope: {
+                control: '='
             },
-            controller: function ($scope) {
+            link: function(scope, element) {
+
+                element.addClass('xcontrol');
+                element.attr('ng-show', 'control.display');
+                element.attr('ng-disabled', 'control.enabled');
+                element.attr('ng-class', '{ highlightedcontrol:highlight }');
+                $compile(element)( scope );
+                
                 $scope.$root.$on('highlight', function (args, params) {
                     $scope.highlight = _.contains(params.names, $scope.control.name);
                 });
-            },
-            templateUrl: "partials/CheckboxControl.html",
-            link: function (scope, element, attr) {
-
-                scope.control = Form.controls.get(attr.CheckboxControl);
             }
         };
     });

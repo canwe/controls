@@ -79,6 +79,13 @@
 
     ITForms.Angular.controller("appcontroller", [ "$scope", "Form", "CSB", function ($scope, Form, CSB) {
         $scope.form = Form;
+        var self = this;
+        Form.controls.forEach(function (control) {
+
+            $scope[control.name] = control;
+
+        });
+
 
         $scope.submit = function () {
             $scope.values = Form.controls;

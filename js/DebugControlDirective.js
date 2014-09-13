@@ -1,10 +1,10 @@
 (function (app) {
     'use strict';
 
-    app.directive("DebugControl", function (Form, Watcher, CSB) {
+    app.directive("debugControl", function (Form, Watcher, CSB) {
 
         return {
-            restrict: "M",
+            restrict: "E",
             replace: true,
             scope: {},
             templateUrl: "partials/DebugControl.html",

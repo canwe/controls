@@ -1,4 +1,7 @@
+.ctrl {
 
+    border: 4px #c0c0c0 solid;
+}
 .watcher LI {
     font-size: smaller;
 }

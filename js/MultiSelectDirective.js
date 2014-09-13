@@ -1,18 +1,16 @@
 (function (app) {
     'use strict';
 
-    app.directive('MultiSelectControl', function (Form) {
+    app.directive('multiSelectControl', function (Form) {
 
         return {
-            restrict: 'M',
-            replace: true,
-            scope: {},
             templateUrl: "partials/MultiSelectControl.html",
-            controller: function () {
-            },
-            link: function (scope, element, attr) {
-                scope.control = Form.controls.get(attr.MultiSelectControl);
+            restrict: 'E',
+            replace: true,
+            scope: {
+                control: '='
             }
+
         };
     });
 

@@ -13,21 +13,18 @@
 <body>
 <div>
 
-    <div ng-app="form" id="ng-app" id="angular" >
-<!-- directive:DebugControl -->
-        <!-- directive: CheckboxControl isrequired -->
-        <!-- directive: CheckboxControl isrequired2 -->
+    <div ng-app="form" id="ng-app" id="angular" ng-controller="appcontroller">
 
-        <!-- directive: ListControl girls -->
-        <!-- directive: ListControl boys -->
+        <checkbox-control control="isrequired"></checkbox-control>
+        <checkbox-control control="isrequired2"></checkbox-control>
+        <list-control control="girls"></list-control>
+        <list-control control="boys"></list-control>
+        <grid-control control="grid"></grid-control>
+        <multi-select-control control="selecta"></multi-select-control>
+        <multi-select-control control="selectb"></multi-select-control>
+        <multi-select-control control="selectc"></multi-select-control>
 
-
-        <!-- directive GridControl grid -->
-        <!-- directive: MultiSelectControl selecta -->
-        <!-- directive: MultiSelectControl selectb -->
-        <!-- directive: MultiSelectControl selectc -->
-
-
+        <!-- directive:DebugControl -->
     </div>
 
 </div>
