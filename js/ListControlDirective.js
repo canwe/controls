@@ -1,28 +1,25 @@
 (function (app) {
     'use strict';
 
-    app.directive("listControl", function (Form, Watcher) {
+    app.directive("listControl", [ '$compile', 'Watcher', function ($compile, Watcher) {
 
-        return {
-            templateUrl: "partials/ListControl.html",
-            restrict: "E",
-            replace: true,
-            scope: {
-                control: '='
-            },
-            controller: function ($scope) {
+        var templateUrl = "partials/ListControl.html",
+            directive = app.makeControlDirective($compile, templateUrl);
 
-                $scope.Add = function (value) {
-                    if ($scope.control.add(value)) {
-                        $scope.newvalue = "";
-                    }
-                };
+        directive.controller = function ($scope) {
 
-                $scope.HandleBlur = function () {
-                    Watcher.add($scope.control.name, 'blur', true);
-                };
-            }
-        };
-    });
+            $scope.Add = function (value) {
+                if ($scope.control.add(value)) {
+                    $scope.newvalue = "";
+                }
+            };
 
-}(ITForms.Angular));
+            $scope.HandleBlur = function () {
+                Watcher.add($scope.control.name, 'blur', true);
+            };
+        }
+
+        return directive;
+    }]);
+
+}(XForms.Angular));

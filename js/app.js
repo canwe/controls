@@ -1,32 +1,31 @@
-﻿window.ITForms = {};
-
-(function (ITForms) {
+﻿window.XForms = {};
+window.XForms.Angular = (function () {
     'use strict';
 
-    ITForms.Angular = angular.module("form", [ 'ngSanitize']);
+    var app = angular.module("form", [ 'ngSanitize']);
 
     // Encapsulates the call to the static data method
-    ITForms.Angular.factory('FormData', function () {
+    app.factory('FormData', function () {
 
-        return ITForms.FormData || {};
+        return window.XForms.FormData || {};
     });
 
-    ITForms.Angular.factory('CSB', function (FormData, Form, Watcher) {
+    app.factory('CSB', function (FormData, Form, Watcher) {
 
-        var csb = new ITForms.CSB2(FormData.csbdata, Form);
+        var actions = new XForms.Actions(FormData.csbdata, Form);
 
         Watcher.OnChange.addHandler(function (args) {
-            csb.trigger(args.params);
+            actions.trigger(args.params);
         });
 
-        csb.executeAll(function (csb) {
-            return csb.executeonpageload;
+        actions.executeAll(function (action) {
+            return action.executeonpageload;
         });
 
-        return csb;
+        return actions;
     });
 
-    ITForms.Angular.factory('Watcher', function ($rootScope, Form) {
+    app.factory('Watcher', function ($rootScope, Form) {
 
         var watcher,
             Watcherservice,
@@ -72,12 +71,13 @@
         return watcher;
     });
 
-    ITForms.Angular.factory('Form', function (FormData) {
+    app.factory('Form', function (FormData) {
 
         return new ITForms.Form(FormData);
     });
 
-    ITForms.Angular.controller("appcontroller", [ "$scope", "Form", "CSB", function ($scope, Form, CSB) {
+    app.controller("appcontroller", [ "$scope", "Form", "CSB", function ($scope, Form, CSB) {
+
         $scope.form = Form;
         var self = this;
         Form.controls.forEach(function (control) {
@@ -92,10 +92,44 @@
         };
 
     }]);
-}(window.ITForms));
 
+    app.makeControlDirective = function ($compile, templateUrl, linkfunc) {
 
-ITForms.Diff = function (newobject, oldobject, keys) {
+        var linker = function(scope, element) {
+
+            element.addClass('xcontrol');
+            element.attr('ng-show', 'control.display');
+            element.attr('ng-disabled', 'control.enabled');
+            element.attr('ng-class', '{ highlightedcontrol:highlight }');
+            $compile(element)( scope );
+
+            scope.$root.$on('highlight', function (args, params) {
+                scope.highlight = _.contains(params.names, scope.control.name);
+            });
+
+            if (linkfunc) {
+                linkfunc.call(this, scope, element);
+            }
+        };
+
+        return {
+            templateUrl: templateUrl,
+            restrict: "E",
+            replace: true,
+            terminal: true,
+            priority: 1000,
+            scope: {
+                control: '='
+            },
+            link: linker
+        };
+    };
+
+    return app;
+
+}());
+
+XForms.Diff = function (newobject, oldobject, keys) {
     'use strict';
 
     newobject = _.pick(newobject, keys);
@@ -109,5 +143,4 @@ ITForms.Diff = function (newobject, oldobject, keys) {
     });
 
     return o;
-
 };

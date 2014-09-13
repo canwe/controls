@@ -121,7 +121,7 @@ var controldata = [
     }
 ];
 
-ITForms.FormData = {
+XForms.FormData = {
     formdata: { teamslug: 'demo', formslug: 'demo', requestid: 0 },
     controldata: controldata,
     csbdata: [

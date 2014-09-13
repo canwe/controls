@@ -127,4 +127,4 @@
 
     });
 
-}(ITForms.Angular));
+}(XForms.Angular));

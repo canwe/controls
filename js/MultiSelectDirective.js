@@ -1,17 +1,11 @@
 (function (app) {
     'use strict';
 
-    app.directive('multiSelectControl', function (Form) {
+    app.directive('multiSelectControl', [ '$compile', function ($compile) {
 
-        return {
-            templateUrl: "partials/MultiSelectControl.html",
-            restrict: 'E',
-            replace: true,
-            scope: {
-                control: '='
-            }
+            var templateUrl = "partials/MultiSelectControl.html";
 
-        };
-    });
+            return app.makeControlDirective($compile, templateUrl);
+    }]);
 
-}(ITForms.Angular));
+}(XForms.Angular));

@@ -1,15 +1,16 @@
-﻿(function (ITForms) {
+﻿(function (XForms) {
     'use strict';
 
     /*
-    ClientSideBehaviours
+
     Trigger:
      {
          object: 'list',
          member: 'Value',
          value: [ 'a', 'b' ]
      };
-     CSB:
+
+     Action:
      {
       triggers: [
         { object: '*', member: '*' }
@@ -28,30 +29,29 @@
 
      */
 
-    var csb2 = function (csbdata, form) {
+    var actions = function (actionData, form) {
 
         this.debuglog = [];
 
-        /* Validates that csb config data each have the right members */
-        this.validate = function (csbs) {
-            return _.map(csbs, function (csb) {
+        /* Validates that actionItem config data each have the right members */
+        this.validate = function (actions) {
+            return _.map(actions, function (actionItem) {
                 var defaults = { triggers: [], conditions: [], actions: [], format: '', executeonpageload: true };
-                csb = _.defaults(csb, defaults);
-                if (csb.triggers.length === 0) {
-                    csb.triggers = _.map(csb.conditions, function (condition) {
+                actionItem = _.defaults(actionItem, defaults);
+                if (actionItem.triggers.length === 0) {
+                    actionItem.triggers = _.map(actionItem.conditions, function (condition) {
                         return {
                             object: condition.object || '*',
                             member: condition.member || '*'
                         };
                     });
                 }
-                return csb;
+                return actionItem;
             });
         };
 
         this.form = form;
-        this._controls = form.controls || { get: function () { } };
-        this.csbs = this.validate(csbdata);
+        this.actions = this.validate(actionData);
         this.OnDebug = new ITForms.Events.Event();
 
         this.debug = function (message) {
@@ -88,71 +88,71 @@
         };
     };
 
-    csb2.prototype.getCSBsForTrigger = function (trigger) {
+    actions.prototype.getactionsForTrigger = function (trigger) {
 
         var self = this;
-        return _.filter(this.csbs, function (csb) {
-            return _.some(csb.triggers,
-                function (csbtrigger) {
-                    return self.triggerIsMatch.call(csbtrigger, trigger);
+        return _.filter(this.actions, function (actionItem) {
+            return _.some(actionItem.triggers,
+                function (actionItemtrigger) {
+                    return self.triggerIsMatch.call(actionItemtrigger, trigger);
                 });
         });
     };
 
-    csb2.prototype.executeAll = function (filter) {
+    actions.prototype.executeAll = function (filter) {
 
-        var csbs = this.csbs,
+        var actions = this.actions,
             self = this;
 
         if (typeof filter === 'function') {
-            csbs = _.filter(csbs, filter);
+            actions = _.filter(actions, filter);
         }
 
-        this.debug({ message: 'Trigger. ExecuteAll. Found ' + csbs.length + ' eligible' });
+        this.debug({ message: 'Trigger. ExecuteAll. Found ' + actions.length + ' eligible' });
 
-        _.each(csbs, function (csb) {
+        _.each(actions, function (actionItem) {
 
-            self.executeCSB(csb);
+            self.executeactionItem(actionItem);
         });
     };
 
-    csb2.prototype.trigger = function (trigger) {
+    actions.prototype.trigger = function (trigger) {
 
         this.triggercount += 1;
 
         var objectname = trigger.object,
             member = trigger.member,
-            applicablecsbs,
+            applicableactions,
             self = this;
 
-        applicablecsbs = this.getCSBsForTrigger(trigger) || [];
+        applicableactions = this.getactionsForTrigger(trigger) || [];
 
-        this.debug({ message: 'Trigger. Found ' + applicablecsbs.length + ' CSBs for ' + objectname + '.' + member, csbs: applicablecsbs, trigger: trigger });
+        this.debug({ message: 'Trigger. Found ' + applicableactions.length + ' actions for ' + objectname + '.' + member, actions: applicableactions, trigger: trigger });
 
-        if (applicablecsbs.length === 0) {
+        if (applicableactions.length === 0) {
             return;
         }
 
-        _.each(applicablecsbs, function (csb) {
+        _.each(applicableactions, function (actionItem) {
 
-            self.executeCSB(csb);
+            self.executeactionItem(actionItem);
         });
     };
 
-    csb2.prototype.executeCSB = function (csb) {
+    actions.prototype.executeactionItem = function (actionItem) {
 
         var self = this,
-            ismatch = this.conditionsMatch(csb.format, csb.conditions);
+            ismatch = this.conditionsMatch(actionItem.format, actionItem.conditions);
 
-        this.debug({ message: 'Matched = ' + ismatch, csb: csb, matched: ismatch });
+        this.debug({ message: 'Matched = ' + ismatch, actionItem: actionItem, matched: ismatch });
 
-        _.each(csb.actions, function (action) {
+        _.each(actionItem.actions, function (action) {
             self.executeAction(ismatch, action);
         });
 
     };
 
-    csb2.prototype.executeAction = function (ismatch, action) {
+    actions.prototype.executeAction = function (ismatch, action) {
 
         var func = ismatch ? action.whentrue : action.whenfalse,
             target;
@@ -164,14 +164,13 @@
 
                 this.debug({ message: 'Calling ' + action.target + '.' + func + '()', action: action });
                 target[func]();
-                //  this.Trigger(target.name, 'recurse');
             } else {
                 this.evaluateExpression(func);
             }
         }
     };
 
-    csb2.prototype.conditionsMatch = function (format, conditions) {
+    actions.prototype.conditionsMatch = function (format, conditions) {
 
         if (!_.isArray(conditions)) {
             return false;
@@ -197,7 +196,7 @@
         return this.evaluateExpression(truth);
     };
 
-    csb2.prototype.createFormatIfNecessary = function (format, count) {
+    actions.prototype.createFormatIfNecessary = function (format, count) {
 
         if (!_.isString(format)) {
             format = '';
@@ -211,7 +210,7 @@
     };
 
     /* Conditional - Creates a default format string eg. {0} && {1}  */
-    csb2.prototype.createFormat = function (count) {
+    actions.prototype.createFormat = function (count) {
 
         var str = '',
             i;
@@ -223,7 +222,7 @@
         return str.substr(0, str.length - 4);
     };
 
-    csb2.prototype.conditionIsMatch = function (condition) {
+    actions.prototype.conditionIsMatch = function (condition) {
 
         if (_.isUndefined(condition)) {
             return true;
@@ -252,7 +251,7 @@
         return true;
     };
 
-    csb2.prototype.evaluateJavaScriptCondition = function (condition) {
+    actions.prototype.evaluateJavaScriptCondition = function (condition) {
 
         condition = _.defaults(condition, { condition: 'true === true' });
 
@@ -261,7 +260,7 @@
         return this.evaluateExpression(expression);
     };
 
-    csb2.prototype.interpolate = function (str) {
+    actions.prototype.interpolate = function (str) {
         var tmp = str,
             start = tmp.indexOf("[", 0),
             end,
@@ -288,7 +287,7 @@
         return tmp;
     };
 
-    csb2.prototype.evaluateControlCondition = function (condition) {
+    actions.prototype.evaluateControlCondition = function (condition) {
 
         var member,
             value,
@@ -304,7 +303,7 @@
         return this.evaluate(value, condition);
     };
 
-    csb2.prototype.evaluate = function (value, condition) {
+    actions.prototype.evaluate = function (value, condition) {
 
         condition = _.defaults(condition, { operator: 'doesnotequal', value: '*', typecoercion: false, casesensitive: false });
 
@@ -343,11 +342,11 @@
         return false;
     };
 
-    csb2.prototype.evaluateWithTypeCoercion = function (value, condition) {
+    actions.prototype.evaluateWithTypeCoercion = function (value, condition) {
         return value === condition;
     };
 
-    csb2.prototype.evaluateExpression = function (expression) {
+    actions.prototype.evaluateExpression = function (expression) {
 
         expression = this.interpolate(expression);
 
@@ -364,7 +363,7 @@
         return result;
     };
 
-    csb2.prototype.evaluateString = function (value, condition) {
+    actions.prototype.evaluateString = function (value, condition) {
 
         var valuetomatch = String(condition.value);
 
@@ -382,7 +381,7 @@
         return value === condition.value;
     };
 
-    csb2.prototype.evaluateBoolean = function (value, condition) {
+    actions.prototype.evaluateBoolean = function (value, condition) {
 
         var result = false;
 
@@ -395,7 +394,7 @@
         return result;
     };
 
-    csb2.prototype.evaluateNumber = function (value, condition) {
+    actions.prototype.evaluateNumber = function (value, condition) {
 
         if (_.isNaN(value)) {
             return false;
@@ -404,16 +403,16 @@
         return _.isDate(condition);
     };
 
-    csb2.prototype.evaluateDate = function (value, condition) {
+    actions.prototype.evaluateDate = function (value, condition) {
 
     };
 
-    csb2.prototype.evaluateArray = function (value, condition) {
+    actions.prototype.evaluateArray = function (value, condition) {
 
         return _.some(value, function (val) { return val === condition.value; });
     };
 
-    csb2.prototype.stringFormat = function (format, args) {
+    actions.prototype.stringFormat = function (format, args) {
 
         /*
          Copyright (c) 2009, CodePlex Foundation
@@ -515,8 +514,8 @@
 
     };
 
-    ITForms.CSB2 = csb2;
+    XForms.Actions = actions;
 
-}(ITForms || {}));
+}(XForms || {}));
 
 

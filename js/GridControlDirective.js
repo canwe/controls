@@ -1,32 +1,31 @@
 (function (app) {
     'use strict';
 
-    app.directive('gridControl', function (Form, $sce) {
+    app.directive("gridControl", [ '$compile', '$sce', function ($compile, $sce) {
 
-        return {
-            templateUrl: "partials/GridControl.html",
-            restrict: 'M',
-            replace: true,
-            scope: { control: '='},
-            controller: function ($scope) {
+        var templateUrl = "partials/GridControl.html",
+            directive = app.makeControlDirective($compile, templateUrl);
 
-                $scope.trust = function (txt) {
-                    return $sce.trustAsHtml(txt);
-                };
+        directive.restrict = 'A';
+        directive.controller = function ($scope) {
 
-                $scope.showRemoveButtons = function () {
+            $scope.trust = function (txt) {
+                return $sce.trustAsHtml(txt);
+            };
 
-                    var control = $scope.control;
+            $scope.showRemoveButtons = function () {
 
-                    if (!control.showremovebuttons) {
-                        return false;
-                    }
+                var control = $scope.control;
 
-                    // if the control is required, don't show the remove button if there's only one row
-                    return !control.required || (control.required && control.values.length > 1);
-                };
-            }
+                if (!control.showremovebuttons) {
+                    return false;
+                }
+
+                // if the control is required, don't show the remove button if there's only one row
+                return !control.required || (control.required && control.values.length > 1);
+            };
         };
-    });
 
-}(ITForms.Angular));
+        return directive;
+    }]);
+}(XForms.Angular));

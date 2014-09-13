@@ -13,4 +13,4 @@
         };
     });
 
-}(ITForms.Angular));
+}(XForms.Angular));
