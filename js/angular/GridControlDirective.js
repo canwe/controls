@@ -3,7 +3,7 @@
 
     app.directive("gridControl", [ '$compile', '$sce', function ($compile, $sce) {
 
-        var templateUrl = "partials/GridControl.html",
+        var templateUrl = "js/angular/partials/GridControl.html",
             directive = app.makeControlDirective($compile, templateUrl);
 
         directive.restrict = 'A';

@@ -1,4 +1,4 @@
-(function (ITForms) {
+(function (XForms) {
     'use strict';
 
     var form = function (config) {
@@ -35,8 +35,6 @@
 
         this.config = config;
         this.controls = [];
-        this.OnControlValueChanged = new ITForms.Events.Event();
-        this.OnFormSubmitted = new ITForms.Events.Event();
         this.enabled = true;
         this.submitenabled = true;
 
@@ -48,7 +46,7 @@
         // Build Control objects, and hook up handlers for their events
         _.each(config.controldata, function (item) {
 
-            var Controltype = ITForms.Controls[item.type],
+            var Controltype = XForms.Controls[item.type],
                 control;
 
             if (!Controltype) {
@@ -56,10 +54,6 @@
             }
 
             control = new Controltype(item);
-
-            control.onvaluechanged.addHandler(function (args) {
-                self.OnControlValueChanged.execute(args.params);
-            });
 
             self.controls.push(control);
         });
@@ -105,6 +99,6 @@
         return this.enabled;
     };
 
-    ITForms.Form = form;
+    XForms.Form = form;
 
-}(ITForms || {}));
+}(XForms || {}));

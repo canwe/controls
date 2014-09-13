@@ -16,6 +16,6 @@
 
     Controls.MultiSelectControl = MultiSelectControl;
 
-}(ITForms.Controls || {}));
+}(XForms.Controls || {}));
 
 

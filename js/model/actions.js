@@ -52,7 +52,7 @@
 
         this.form = form;
         this.actions = this.validate(actionData);
-        this.OnDebug = new ITForms.Events.Event();
+        this.OnDebug = new XForms.Events.Event();
 
         this.debug = function (message) {
             this.debuglog.push(message);

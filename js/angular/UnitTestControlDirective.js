@@ -4,7 +4,7 @@
     app.directive("UnitTestControl", function (Form) {
 
         return {
-            templateUrl: "partials/UnitTestControl.html",
+            templateUrl: "js/angular/partials/UnitTestControl.html",
             restrict: "E",
             replace: true,
             scope: {

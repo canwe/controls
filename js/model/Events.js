@@ -1,7 +1,7 @@
-(function (ITForms) {
+(function (XForms) {
     'use strict';
 
-    ITForms.Events = {};
+    XForms.Events = {};
 
     var Event = function () {
 
@@ -38,6 +38,6 @@
         return args;
     };
 
-    ITForms.Events.Event = Event;
+    XForms.Events.Event = Event;
 
-}(ITForms || {}));
+}(XForms || {}));

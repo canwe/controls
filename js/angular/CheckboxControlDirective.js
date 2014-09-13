@@ -4,7 +4,7 @@
 
     app.directive("checkboxControl", [ '$compile', function ($compile) {
 
-        var templateUrl = "partials/CheckboxControl.html";
+        var templateUrl = "js/angular/partials/CheckboxControl.html";
 
         return app.makeControlDirective($compile, templateUrl);
     }]);

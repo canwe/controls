@@ -37,7 +37,7 @@ window.XForms.Angular = (function () {
             this.changes = [];
 
             // Event to allow subscribers to register for change notifications
-            this.OnChange = new ITForms.Events.Event();
+            this.OnChange = new XForms.Events.Event();
 
             // Add the value change to the collection and notify subscribers
             this.add = function (object, member, value) {
@@ -57,7 +57,7 @@ window.XForms.Angular = (function () {
         _.each(Form.controls, function (control) {
 
             // Put the control into scope
-            var key = 'itforms_control_' + control.name;
+            var key = 'xforms' + control.name;
             $rootScope[key] = control;
 
             _.each(_.without(watchkeys, 'name'), function (watchkey) {
@@ -73,7 +73,7 @@ window.XForms.Angular = (function () {
 
     app.factory('Form', function (FormData) {
 
-        return new ITForms.Form(FormData);
+        return new XForms.Form(FormData);
     });
 
     app.controller("appcontroller", [ "$scope", "Form", "CSB", function ($scope, Form, CSB) {
@@ -85,7 +85,6 @@ window.XForms.Angular = (function () {
             $scope[control.name] = control;
 
         });
-
 
         $scope.submit = function () {
             $scope.values = Form.controls;
@@ -129,7 +128,7 @@ window.XForms.Angular = (function () {
 
 }());
 
-XForms.Diff = function (newobject, oldobject, keys) {
+window.XForms.Diff = function (newobject, oldobject, keys) {
     'use strict';
 
     newobject = _.pick(newobject, keys);

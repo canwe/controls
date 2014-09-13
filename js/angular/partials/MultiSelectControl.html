@@ -1,5 +1,5 @@
 <div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
-    <h3>{{control.label}} <span class="required" ng-show="control.required">*</span></h3>
+    <h4>{{control.label}} <span class="required" ng-show="control.required">*</span></h4    >
     <fieldset>
         <div  ng-if="control.style === 'compact'">
             <span ng-repeat="value in control.values"><input type="checkbox" ng-model="value.checked">{{value.value}}</span>

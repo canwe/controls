@@ -33,6 +33,6 @@
 
     Controls.GridControl = GridControl;
 
-}(ITForms.Controls || {}));
+}(XForms.Controls || {}));
 
 

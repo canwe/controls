@@ -21,4 +21,4 @@
 
     controls.UnitTestControl = UnitTestControl;
 
-}(ITForms.Controls || {}));
+}(XForms.Controls || {}));

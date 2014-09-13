@@ -10,4 +10,4 @@
 
     Controls.CheckboxControl = CheckboxControl;
 
-}(ITForms.Controls || {}));
+}(XForms.Controls || {}));

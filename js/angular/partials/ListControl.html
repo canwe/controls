@@ -1,6 +1,6 @@
 <div ng-show="control.display" ng-disabled="!control.enabled" ng-class="{ highlightedcontrol:highlight }" class="itforms-control">
 
-    <h3>{{control.name}} <span class="required" ng-show="control.required">*</span></h3>
+    <h4>{{control.name}} <span class="required" ng-show="control.required">*</span></h4>
     <button class="btn btn-danger" ng-bind="control.message" ng-show="control.message"></button><br>
     <div class="input-append">
         <input type="text" ng-model="newvalue" ng-disabled="!control.enabled" ng-blur="HandleBlur()"  />

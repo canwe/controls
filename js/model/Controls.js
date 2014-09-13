@@ -1,6 +1,6 @@
 window.ITForms = window.ITForms || {};
 
-ITForms.Controls = {};
+XForms.Controls = {};
 
 (function (Controls) {
     'use strict';
@@ -28,7 +28,7 @@ ITForms.Controls = {};
 
         this.initialvalue = this._value;
         this.message = '';
-        this.onvaluechanged = new ITForms.Events.Event();
+        this.onvaluechanged = new XForms.Events.Event();
     };
 
     control.prototype.raisevaluechanged = function () {
@@ -101,4 +101,4 @@ ITForms.Controls = {};
 
     Controls.Control = control;
 
-}(ITForms.Controls || {}));
+}(XForms.Controls || {}));

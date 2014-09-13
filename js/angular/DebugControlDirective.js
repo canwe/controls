@@ -7,7 +7,7 @@
             restrict: "E",
             replace: true,
             scope: {},
-            templateUrl: "partials/DebugControl.html",
+            templateUrl: "js/angular/partials/DebugControl.html",
             link: function (scope) {
 
                 scope.gettime = function () {

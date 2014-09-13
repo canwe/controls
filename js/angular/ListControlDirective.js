@@ -3,7 +3,7 @@
 
     app.directive("listControl", [ '$compile', 'Watcher', function ($compile, Watcher) {
 
-        var templateUrl = "partials/ListControl.html",
+        var templateUrl = "js/angular/partials/ListControl.html",
             directive = app.makeControlDirective($compile, templateUrl);
 
         directive.controller = function ($scope) {
