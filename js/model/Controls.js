@@ -1,4 +1,4 @@
-window.ITForms = window.ITForms || {};
+window.XForms = window.XForms || {};
 
 XForms.Controls = {};
 
