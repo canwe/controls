@@ -3,6 +3,7 @@
 
 'use strict';
 
+
 window.XForms.React.Application = React.createClass({displayName: 'Application',
 
     render: function() {
@@ -23,6 +24,7 @@ window.XForms.React.Application = React.createClass({displayName: 'Application',
             );
     }
 });
+
 
 React.renderComponent(
     XForms.React.Application({data: window.XForms.FormData}), document.getElementById('app')

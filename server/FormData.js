@@ -1,3 +1,6 @@
+window.XForms = window.XForms || {};
+
+
 var controldata = [
     {
         name: 'test1',

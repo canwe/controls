@@ -3,6 +3,10 @@ BODY{
 
 }
 
+.hide {
+    display: none;
+}
+
 .watcher LI {
     font-size: smaller;
 }
