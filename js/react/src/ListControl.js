@@ -5,6 +5,13 @@
 
 window.XForms.React.ListControl = React.createClass({
 
+    getInitialState: function () {
+
+      return {
+
+            addButtonDisabled: true
+      };
+    },
     remove: function (item) {
 
         var values = this.props.model.values;
@@ -51,7 +58,13 @@ window.XForms.React.ListControl = React.createClass({
         });
         addTextBox.value = '';
         addTextBox.focus();
+        this.enableAddButton();
+    },
+    enableAddButton: function () {
 
+        var textBoxValue = this.refs.addText.getDOMNode().value;
+        var addButtonDisabled = textBoxValue ? false: true;
+        this.setState({ 'addButtonDisabled': addButtonDisabled });
     },
     render: function() {
 
@@ -84,8 +97,8 @@ window.XForms.React.ListControl = React.createClass({
                 <h4>{control.name} <span className={requiredMarkerClasses}>*</span></h4>
 
                 <div className="input-append">
-                    <input type="text" disabled={!control.enabled} ng-blur="HandleBlur()" ref="addText" />
-                    <button onClick={this.add} ng-disabled="!newvalue" ng-show="control.enabled" className={addButtonClasses}>Add</button>
+                    <input type="text" disabled={!control.enabled} onKeyUp={this.enableAddButton} ref="addText" />
+                    <button onClick={this.add} disabled={this.state.addButtonDisabled} className={addButtonClasses}>Add</button>
                 </div>
 
                 <ul>{listItems}</ul>
