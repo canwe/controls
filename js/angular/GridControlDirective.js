@@ -6,7 +6,6 @@
         var templateUrl = "js/angular/partials/GridControl.html",
             directive = app.makeControlDirective($compile, templateUrl);
 
-        directive.restrict = 'A';
         directive.controller = function ($scope) {
 
             $scope.trust = function (txt) {

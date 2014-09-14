@@ -1,7 +1,8 @@
-.ctrl {
+BODY{
+    padding-left: 10px;
 
-    border: 4px #c0c0c0 solid;
 }
+
 .watcher LI {
     font-size: smaller;
 }
@@ -20,8 +21,9 @@
 }
 
 .xcontrol {
-    width:50%;
-    border: 1px solid black;
+    border: 1px #c0c0c0 solid;
+    padding-left: 15px;
+    width: 100%;
 }
 
 .unittestpass {
