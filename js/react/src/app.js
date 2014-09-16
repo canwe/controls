@@ -14,7 +14,7 @@ window.XForms.React.Application = React.createClass({
             var controltype = window.XForms.React[item.type];
 
             if (controltype) {
-                return window.XForms.React.Control({key: i, model: item}, controltype(null));
+                return window.XForms.React.Control({ key: i, model: item }, controltype(null));
             }
         });
 
