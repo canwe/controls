@@ -4,6 +4,16 @@
 
 window.XForms.React.MultiSelectControl = React.createClass({
 
+    onChecked: function (item) {
+
+        var values = this.props.model.values;
+
+
+        this.props.changeState({
+            'values': values,
+            'message': ''
+        });
+    },
     render: function() {
 
         var control = this.props.model;
@@ -16,7 +26,6 @@ window.XForms.React.MultiSelectControl = React.createClass({
 
         } else if (control.style === 'columns') {
             values = <window.XForms.React.MultiSelectColumns  values={control.values} columncount={control.columncount} />;
-
         }
 
         return (
@@ -28,14 +37,18 @@ window.XForms.React.MultiSelectControl = React.createClass({
     }
 });
 
+
+
+
+
 window.XForms.React.MultiSelectCompact = React.createClass({
 
     render: function() {
 
         var values = this.props.values;
 
-        var inputs = values.map(function(value){
-            return (<span><input type="checkbox" checked={value.checked} />{value.value}</span> );
+        var inputs = values.map(function(value, i){
+            return (<span key={i}><input type="checkbox" checked={value.checked} />{value.value}</span> );
         });
 
         return (<div>{inputs}</div>);
@@ -63,8 +76,8 @@ window.XForms.React.MultiSelectColumns = React.createClass({
             column10: count === 10
         });
 
-        var inputs = values.map(function(value){
-            return (<div><input type="checkbox" checked={value.checked} /> {value.value}</div>);
+        var inputs = values.map(function(value, i){
+            return (<div key={i}><input type="checkbox" checked={value.checked} /> {value.value}</div>);
         });
 
         return (<div className={columnClasses}>{inputs}</div>);

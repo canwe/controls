@@ -86,10 +86,10 @@ window.XForms.React.ListControl = React.createClass({
             'hide': !control.enabled
         });
 
-        var listItems = control.values.map(function (item) {
+        var listItems = control.values.map(function (item, i) {
 
             var removeHandler = self.remove.bind(self, item);
-            return (<li>{item}<button className={listItemClasses} onClick={removeHandler}>X</button></li>);
+            return (<li key={i}>{item}<button className={listItemClasses} onClick={removeHandler}>X</button></li>);
         });
 
          return (
