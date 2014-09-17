@@ -16,9 +16,6 @@ window.XForms.React.Control = React.createClass({displayName: 'Control',
 
     changeState: function (newState) {
 
-
-
-
         this.setState(newState);
     },
 

@@ -102,6 +102,9 @@ window.XForms.React.ListControl = React.createClass({
                 </div>
 
                 <ul>{listItems}</ul>
+
+
+                <pre>{ JSON.stringify(control.values) }</pre>
             </div>
             );
     }

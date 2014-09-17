@@ -101,7 +101,10 @@ window.XForms.React.ListControl = React.createClass({displayName: 'ListControl',
                     React.DOM.button({onClick: this.add, disabled: this.state.addButtonDisabled, className: addButtonClasses}, "Add")
                 ), 
 
-                React.DOM.ul(null, listItems)
+                React.DOM.ul(null, listItems), 
+
+
+                React.DOM.pre(null,  JSON.stringify(control.values) )
             )
             );
     }
