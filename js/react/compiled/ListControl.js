@@ -1,7 +1,6 @@
 
 /** @jsx React.DOM */
 
-'use strict';
 
 window.XForms.React.ListControl = React.createClass({displayName: 'ListControl',
 
