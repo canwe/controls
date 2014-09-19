@@ -1,11 +1,6 @@
 `cd controls`
 `npm install`
-`http-server`
+`grunt`
 
-`cd server`
-`npm install`
-`node server.js`
-
-For development:
-cd js/react/
-jsx -w ./src /.compiled
+Open new terminal
+`grunt servers`
