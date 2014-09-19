@@ -3,3 +3,4 @@
 **/.module-cache/**
 js/react/compiled/**
 js/react/dist/**
+js/vendors/**
