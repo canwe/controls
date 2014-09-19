@@ -1,3 +1,5 @@
 **/node_modules/**
 **/.idea/**
 **/.module-cache/**
+js/react/compiled/**
+js/react/dist/**
