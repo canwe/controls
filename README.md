@@ -1,5 +1,5 @@
 `cd controls`
-`npm install`
+`sudo npm install`
 `bower install`
 `grunt`
 
