@@ -18,6 +18,12 @@ window.XForms.React.Application = React.createClass({
             }
         });
 
+       models.forEach(function (model) {
+
+
+           console.log(model);
+       });
+
         return (
             <div>{models}</div>
             );

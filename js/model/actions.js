@@ -61,13 +61,9 @@
 
         this.context = {
             get: function (name) {
-                if (name === 'form') {
-                    return this.form;
-                }
 
-                return this.controls.get(name);
-            },
-            controls: this.form.controls
+                return this.form.controls.get(name);
+            }
         };
 
         this.triggerIsMatch = function (trigger) {
@@ -117,6 +113,10 @@
     };
 
     actions.prototype.trigger = function (trigger) {
+
+
+        alert(JSON.stringify(trigger));
+        return;
 
         this.triggercount += 1;
 

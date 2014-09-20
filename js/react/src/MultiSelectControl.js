@@ -11,8 +11,7 @@ window.XForms.React.MultiSelectControl = React.createClass({
         values[index].checked = !value.checked;
 
         this.props.changeState({
-            'values': values,
-            'message': ''
+            'values': values
         });
     },
     render: function() {

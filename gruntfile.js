@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                 }
             ],
             concatfiles:  {
-                dest: 'js/react/dist/reactapp.js',
+                dest: 'js/react/dist/xforms.react.js',
                 src: [
                     'js/vendors/react/react-with-addons.js',
                     'js/vendors/ecmascript6.polyfills.js',
@@ -21,7 +21,7 @@ module.exports = function (grunt) {
                 ]
             },
             uglifyfiles: [{
-                'js/react/dist/reactapp.min.js': ['js/react/dist/reactapp.js']
+                'js/react/dist/xforms.react.min.js': ['js/react/dist/xforms.react.js']
             }]
         },
         react: {

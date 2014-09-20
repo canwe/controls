@@ -7,30 +7,56 @@ window.XForms = window.XForms || {};
 
 window.XForms.React = {};
 
+window.XForms.Form = {
+
+    ctrls: [],
+
+    controls: {
+
+        get: function (name) {
+            return this.ctrls.find(function (control) { return control.name === name; });
+        }
+    },
+
+    add: function (control) {
+        this.ctrls.push(control);
+    }
+};
+
+
+window.XForms.Actions.Current = new XForms.Actions(window.XForms.FormData.csbdata, window.XForms.Form);
+
+
+var eventsMixin = {
+
+    changeState: function (newState) {
+
+        var self = this;
+
+        this.setState(newState, function () {
+
+            Object.keys(newState).forEach(function (property) {
+
+                window.XForms.Actions.Current.trigger({ object: self.name, member: property});
+            });
+        });
+    },
+
+    componentWillMount: function () {
+
+        window.XForms.Form.add({
+           name: this.state.name
+        });
+    }
+};
+
 window.XForms.React.Control = React.createClass({
+
+    mixins: [ eventsMixin ], // Use the mixin
 
     getInitialState: function () {
 
         return this.props.model;
-    },
-
-    changeState: function (newState) {
-
-        this.setState(newState);
-    },
-
-    componentWillMount: function() {
-
-        var self = this;
-
-        var o = {
-            name: self.state.name,
-            func: function (state) {
-                self.setState(state);
-            }
-        };
-
-      //  window.eventStub.register(o);
     },
 
     render: function () {
