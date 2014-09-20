@@ -14,7 +14,6 @@ module.exports = function (grunt) {
             concatfiles:  {
                 dest: 'js/react/dist/xforms.react.js',
                 src: [
-                    'js/vendors/react/react-with-addons.js',
                     'js/vendors/ecmascript6.polyfills.js',
                     'js/react/compiled/Control.js',
                     'js/react/compiled/*.js'

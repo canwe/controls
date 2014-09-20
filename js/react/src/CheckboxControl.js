@@ -16,8 +16,13 @@ window.XForms.React.CheckboxControl = React.createClass({
                 }
         };
 
+        var requiredMarkerClasses = React.addons.classSet({
+            'required': true,
+            'hide': !control.required
+        });
+
         return (
-            <div><h4>{control.name}</h4><input type="checkbox" checkedLink={checked} />
+            <div><h4>{control.name} <span className={requiredMarkerClasses}>*</span></h4><input type="checkbox" checkedLink={checked} />
             </div>
             );
     }

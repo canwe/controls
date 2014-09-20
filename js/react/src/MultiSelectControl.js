@@ -20,6 +20,11 @@ window.XForms.React.MultiSelectControl = React.createClass({
         var values = '';
         var columncount = (control.style === 'columns') ? control.columncount : 1;
 
+        var requiredMarkerClasses = React.addons.classSet({
+            'required': true,
+            'hide': !control.required
+        });
+
         if (control.style === 'compact') {
             values = <window.XForms.React.MultiSelectCompact values={control.values} oncheck={this.onChecked} />;
         } else  {
@@ -28,7 +33,7 @@ window.XForms.React.MultiSelectControl = React.createClass({
 
         return (
             <div>
-                <h4>{control.label}<span class="required">*</span></h4>
+                <h4>{control.label}<span className={requiredMarkerClasses}>*</span></h4>
                 <fieldset>{values}</fieldset>
             </div>
             );

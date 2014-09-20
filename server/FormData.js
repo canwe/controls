@@ -18,10 +18,10 @@ var controldata = [
         template: [
             { type: 'textbox', title: 'TextBox', placeholder: 'enter text', required: false, enabled: true },
             { type: 'checkbox', title: 'CheckBox', value: true, required: true, enabled: true },
-            { type: 'date', title: 'Date', placeholder: 'enter text', required: true, enabled: true },
+          //  { type: 'date', title: 'Date', placeholder: 'enter text', required: true, enabled: true },
             { type: 'paragraph', title: 'Paragraph', value: '<h3>hello</h3>', required: true, enabled: true },
             { type: 'textarea', title: 'TextArea', value: 'Hello', placeholder: 'enter text', required: true, enabled: true },
-            { type: 'dropdownlist', title: 'Dropdownlist', value: 'c',  values: [ 'a', 'b', 'c' ], placeholder: 'enter text', required: true, enabled: false }
+            { type: 'dropdownlist', title: 'Dropdownlist', value: 'c',  values: [ 'a', 'b', 'c' ], placeholder: 'enter text', required: true, enabled: true }
         ],
         values: [
 //            [ { value: 'a1', type: 'textarea' }, { value: 'a2', type: 'textbox' }, { value: true, type: 'checkbox' }],

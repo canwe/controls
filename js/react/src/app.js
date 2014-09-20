@@ -7,8 +7,6 @@ window.XForms.React.Application = React.createClass({
 
     render: function() {
 
-        console.log(this.props);
-
         var data = this.props.data.controldata.sort(function(a, b ){ return a.order > b.order; });
 
         var models = data.map(function (item, i) {
