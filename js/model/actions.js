@@ -55,14 +55,17 @@
         this.OnDebug = new XForms.Events.Event();
 
         this.debug = function (message) {
+
+         //   console.log(message);
             this.debuglog.push(message);
             this.OnDebug.execute(message);
         };
 
+        var self = this;
         this.context = {
             get: function (name) {
 
-                return this.form.controls.get(name);
+                return self.form.controls.get(name);
             }
         };
 
@@ -113,12 +116,6 @@
     };
 
     actions.prototype.trigger = function (trigger) {
-
-
-        alert(JSON.stringify(trigger));
-        return;
-
-        this.triggercount += 1;
 
         var objectname = trigger.object,
             member = trigger.member,
@@ -190,7 +187,6 @@
             truths.push(self.conditionIsMatch(condition));
         });
 
-        this.conditionsevaluated += conditions.length;
         truth = 'return ' + this.stringFormat(format, truths);
 
         return this.evaluateExpression(truth);
@@ -300,7 +296,10 @@
         member = control[condition.member];
         value = _.isFunction(member) ? member.call(control) : member;
 
-        return this.evaluate(value, condition);
+        var result = this.evaluate(value, condition);
+
+//        console.log(result + ' = ' + condition.object + '.' + condition.member + ' ' + condition.operator + ' ' + condition.value );
+        return result;
     };
 
     actions.prototype.evaluate = function (value, condition) {

@@ -17,8 +17,7 @@ window.XForms.React.CheckboxControl = React.createClass({
         };
 
         return (
-            <div>{control.name}<input type="checkbox" checkedLink={checked} />
-            <pre>{JSON.stringify(control._value)}</pre>
+            <div><h4>{control.name}</h4><input type="checkbox" checkedLink={checked} />
             </div>
             );
     }

@@ -33,7 +33,8 @@ var controldata = [
         label: 'Grid',
         display: true,
         enabled: true,
-        readonly: false
+        readonly: false,
+        order: 8
     },
     {
         name: 'selectc',
@@ -64,7 +65,8 @@ var controldata = [
         type: 'MultiSelectControl',
         style: 'columns',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 7
     },
     {
         name: 'selecta',
@@ -77,7 +79,8 @@ var controldata = [
         type: 'MultiSelectControl',
         style: 'oneperline',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 6
     },
     {
         name: 'selectb',
@@ -90,21 +93,24 @@ var controldata = [
         type: 'MultiSelectControl',
         style: 'compact',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 5
     },
     {
         name: 'girls',
         values: ['Tamsin', 'Bridget', 'hide'],
         type: 'ListControl',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 3
     },
     {
         name: 'boys',
         values: ['Jacob', 'Alex', 'Henry'],
             type: 'ListControl',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 4
     },
     {
         name: 'isrequired',
@@ -112,14 +118,16 @@ var controldata = [
         type: 'CheckboxControl',
         display: true,
         enabled: true,
-        required: true
+        required: true,
+        order: 1
     },
     {
         name: 'isrequired2',
         _value: false,
         type: 'CheckboxControl',
         display: true,
-        enabled: true
+        enabled: true,
+        order: 2
     }
 ];
 

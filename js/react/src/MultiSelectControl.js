@@ -30,7 +30,6 @@ window.XForms.React.MultiSelectControl = React.createClass({
             <div>
                 <h4>{control.label}<span class="required">*</span></h4>
                 <fieldset>{values}</fieldset>
-                <pre>{ JSON.stringify(control.values) }</pre>
             </div>
             );
     }
@@ -49,7 +48,7 @@ window.XForms.React.MultiSelectCompact = React.createClass({
         var inputs = values.map(function(value, i){
 
             var handler = self.oncheck.bind(self, i, value);
-            return (<span key={i}><input type="checkbox" checked={value.checked} onChange={handler} />{value.value}</span> );
+            return (<span key={i}><input type="checkbox" checked={value.checked} onChange={handler} /> {value.value}</span> );
         });
 
         return (<div>{inputs}</div>);

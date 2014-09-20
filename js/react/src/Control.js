@@ -7,25 +7,78 @@ window.XForms = window.XForms || {};
 
 window.XForms.React = {};
 
-window.XForms.Form = {
+window.XForms.ControlWrapper = function (obj) {
 
-    ctrls: [],
+    this.obj = obj;
 
-    controls: {
+    this.setState = function (newState) {
 
-        get: function (name) {
-            return this.ctrls.find(function (control) { return control.name === name; });
+        this.obj.changeState(newState);
+    };
+
+    // actions
+
+    this.show = function () {
+        this.setState({ display: true });
+    };
+    this.hide = function () {
+
+        this.setState({ display: false });
+    };
+    this.enable = function () {
+
+        this.setState({ enabled: true });
+    };
+    this.disable = function () {
+
+        this.setState({ enabled: false });
+    };
+
+    // properties
+    this.enabled = function () {
+        return this.obj.state.enabled;
+    };
+
+    this.display = function () {
+        return this.obj.state.display;
+    };
+
+    this.value = function () {
+
+        var i,
+            valueProperties = [ 'value', 'values', '_value' ];
+
+        for(i = 0; i < valueProperties.length; i++) {
+
+            if (!_.isUndefined(this.obj.state[valueProperties[i]])) {
+                return this.obj.state[valueProperties[i]];
+            }
         }
-    },
-
-    add: function (control) {
-        this.ctrls.push(control);
-    }
+    };
 };
 
+window.XForms.Form = function () {
 
-window.XForms.Actions.Current = new XForms.Actions(window.XForms.FormData.csbdata, window.XForms.Form);
+    var self = this;
+    this.ctrls = [];
 
+    this.controls =  {
+
+        get: function (name) {
+
+            var obj = self.ctrls.find(function (control) { return control.state.name === name; });
+            return new window.XForms.ControlWrapper(obj);
+        }
+    };
+};
+
+window.XForms.Form.prototype.add = function (control) {
+
+    this.ctrls.push(control);
+};
+
+window.XForms.Form.Current = new window.XForms.Form();
+window.XForms.Actions.Current = new XForms.Actions(window.XForms.FormData.csbdata, window.XForms.Form.Current);
 
 var eventsMixin = {
 
@@ -37,16 +90,22 @@ var eventsMixin = {
 
             Object.keys(newState).forEach(function (property) {
 
-                window.XForms.Actions.Current.trigger({ object: self.name, member: property});
+                if (property === 'values') {
+                    property = 'value';
+                }
+
+                if (property === '_value') {
+                    property = 'value';
+                }
+
+                window.XForms.Actions.Current.trigger({ object: self.state.name, member: property});
             });
         });
     },
 
     componentWillMount: function () {
 
-        window.XForms.Form.add({
-           name: this.state.name
-        });
+        window.XForms.Form.Current.add(this);
     }
 };
 
@@ -89,10 +148,17 @@ window.XForms.React.Control = React.createClass({
             }
         });
 
+        var button = '';
+        if (model.message) {
+           button =
+               (<div>
+                <button className={messageClasses}>{model.message}</button>
+                <br />
+            </div>);
+        }
+
         return (
-            <div className={wrapperClasses}>
-                <button className={messageClasses}>{model.message}</button><br />
-                {child}
+            <div className={wrapperClasses}>{button} { child }
                 <div className={debugClasses}><h4>Debug</h4><pre>{JSON.stringify(model)}</pre></div>
             </div>
             );
