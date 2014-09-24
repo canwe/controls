@@ -26,9 +26,9 @@ window.XForms.React.MultiSelectControl = React.createClass({
         });
 
         if (control.style === 'compact') {
-            values = <window.XForms.React.MultiSelectCompact values={control.values} oncheck={this.onChecked} />;
+            values = <window.XForms.React.MultiSelectCompact values={control.values} onChecked={this.onChecked} />;
         } else  {
-            values = <window.XForms.React.MultiSelectColumns  values={control.values} oncheck={this.onChecked} columncount={columncount} />;
+            values = <window.XForms.React.MultiSelectColumns  values={control.values} onChecked={this.onChecked} columncount={columncount} />;
         }
 
         return (
@@ -42,17 +42,17 @@ window.XForms.React.MultiSelectControl = React.createClass({
 
 window.XForms.React.MultiSelectCompact = React.createClass({
 
-    oncheck: function (index, value) {
-        this.props.oncheck(index, value);
+    onChecked: function (index, value) {
+        this.props.onChecked(index, value);
     },
     render: function() {
 
         var self = this;
         var values = this.props.values;
 
-        var inputs = values.map(function(value, i){
+        var inputs = values.map(function (value, i) {
 
-            var handler = self.oncheck.bind(self, i, value);
+            var handler = self.onChecked.bind(self, i, value);
             return (<span key={i}><input type="checkbox" checked={value.checked} onChange={handler} /> {value.value}</span> );
         });
 
@@ -62,32 +62,21 @@ window.XForms.React.MultiSelectCompact = React.createClass({
 
 window.XForms.React.MultiSelectColumns = React.createClass({
 
-    oncheck: function (index, value) {
-        this.props.oncheck(index, value);
+    onChecked: function (index, value) {
+        this.props.onChecked(index, value);
     },
     render: function() {
 
         var self = this;
         var values = this.props.values;
 
-        var count = this.props.columncount;
-        var columnClasses = React.addons.classSet({
-
-            column1: count === 1,
-            column2: count === 2,
-            column3: count === 3,
-            column4: count === 4,
-            column5: count === 5,
-            column6: count === 6,
-            column7: count === 7,
-            column8: count === 8,
-            column9: count === 9,
-            column10: count === 10
-        });
+        var classes = {};
+        classes['column' + (this.props.columncount)] = true
+        var columnClasses = React.addons.classSet(classes);
 
         var inputs = values.map(function(value, i){
 
-            var handler = self.oncheck.bind(self, i, value);
+            var handler = self.onChecked.bind(self, i, value);
             return (<div key={i}><input type="checkbox" checked={value.checked} onChange={handler} /> {value.value}</div>);
         });
 
