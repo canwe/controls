@@ -11,6 +11,15 @@ window.XForms.React.GridControl = React.createClass({
             control.values.push(control.template.map(function (x) { return _.clone(x); }));
         }
     },
+    componentDidMount: function () {
+
+        $(this.getDOMNode()).find('.datepicker').pickadate();
+    },
+    componentDidUpdate: function () {
+
+        $(this.getDOMNode()).find('.datepicker').pickadate();
+    },
+
     add: function () {
 
         var control = this.props.model;
@@ -20,6 +29,24 @@ window.XForms.React.GridControl = React.createClass({
         this.props.changeState({
             'values': values
         });
+    },
+    textbox: function (cell) {
+        return (<input type="text" disabled={!cell.enabled} placeholder={cell.placeholder} />);
+    },
+    checkbox: function (cell) {
+        return (<div><input type="checkbox" disabled={ !cell.enabled } /><label>{cell.value}</label></div>);
+    },
+    paragraph: function (cell) {
+        return (<p>{cell.value}</p>);
+    },
+    textarea: function (cell) {
+        return (<textarea disabled={!cell.enabled} placeholder={cell.placeholder}></textarea>);
+    },
+    dropdownlist: function (cell) {
+        return ( <select disabled={!cell.enabled} placeholder={cell.placeholder}></select>);
+    },
+    date: function (cell) {
+        return (<input type="datetime" className="datepicker" disabled={!cell.enabled} placeholder={cell.placeholder} />);
     },
     render: function() {
 
@@ -50,7 +77,7 @@ window.XForms.React.GridControl = React.createClass({
         var rows = control.values.map(function (row, i) {
 
             var td =  row.map(function (cell, j) {
-                return (<td key={i+j}>{JSON.stringify(cell)}</td>);
+                return (<td key={i+j}>{self[cell.type](cell)}</td>);
             });
 
             return (<tr>{td}</tr>);
@@ -70,5 +97,7 @@ window.XForms.React.GridControl = React.createClass({
                 <pre>{JSON.stringify(control)}</pre>
             </div>
             );
-    }
+        }
+
+
 });
