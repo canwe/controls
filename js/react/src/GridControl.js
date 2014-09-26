@@ -37,13 +37,16 @@ window.XForms.React.GridControl = React.createClass({
         return (<div><input type="checkbox" disabled={ !cell.enabled } /><label>{cell.value}</label></div>);
     },
     paragraph: function (cell) {
-        return (<p>{cell.value}</p>);
+        return (<p dangerouslySetInnerHTML={{ __html: cell.value }}></p>);
     },
     textarea: function (cell) {
         return (<textarea disabled={!cell.enabled} placeholder={cell.placeholder}></textarea>);
     },
     dropdownlist: function (cell) {
-        return ( <select disabled={!cell.enabled} placeholder={cell.placeholder}></select>);
+        var options = cell.values.map(function (value) {
+            return (<option>{value}</option>);
+        });
+        return ( <select disabled={!cell.enabled} placeholder={cell.placeholder}>{options}</select>);
     },
     date: function (cell) {
         return (<input type="datetime" className="datepicker" disabled={!cell.enabled} placeholder={cell.placeholder} />);
@@ -52,10 +55,17 @@ window.XForms.React.GridControl = React.createClass({
 
         var self = this;
         var control = this.props.model;
+        var rowCount = control.values.length;
 
-        var showRemoveButton = function () {
-            return true;
-        };
+        var showRemoveButton = function (rowCount) {
+
+            if (!control.showremovebuttons) {
+                return false;
+            }
+
+            // if the control is required, don't show the remove button if there's only one row
+            return !control.required || (control.required && rowCount > 1);
+        }(rowCount);
 
         var requiredMarkerClasses = React.addons.classSet({
             'required': true,
@@ -74,13 +84,18 @@ window.XForms.React.GridControl = React.createClass({
             return (<td key={i}>{column.title} <span className={headerClasses}>*</span></td>);
         });
 
+        var removeButtonClasses = React.addons.classSet({
+            'hide': !showRemoveButton
+        });
+
         var rows = control.values.map(function (row, i) {
 
-            var td =  row.map(function (cell, j) {
+            var td = row.map(function (cell, j) {
                 return (<td key={i+j}>{self[cell.type](cell)}</td>);
             });
 
-            return (<tr>{td}</tr>);
+            var remove = (<td className={removeButtonClasses}><button className="btn btn-danger">X</button></td>);
+            return (<tr>{td}{remove}</tr>);
         });
 
         return (
@@ -98,6 +113,4 @@ window.XForms.React.GridControl = React.createClass({
             </div>
             );
         }
-
-
 });
